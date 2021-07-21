@@ -2,8 +2,8 @@ window.addEventListener('DOMContentLoaded', function () {
     let items = document.querySelectorAll('.countdown__item > h4');
     let timeFinish = document.querySelector('.countdown');
 
-    let date = new Date(2022, 9, 18, 16, 38, 55).getTime();
-
+    let date = new Date(2021, 6, 21, 23, 51, 48).getTime();
+    let distance;
     function getCountdownDate() {
         const now = new Date().getTime();
         const distance = date - now;
@@ -33,11 +33,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
         const arr = [y, m, d, h, min, sec];
+        console.log(distance)
 
         if (distance < 0) {
-            timeFinish.innerHtml = `
-                <h1 class="end">Time Finished!</h1>
-            `
+            clearInterval(countDownInterval);
+            timeFinish.innerHTML = '<h1 class="end">Time Finished!</h1>'
+
         }
 
         items.forEach((item, i) => {
@@ -48,8 +49,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     }
 
+
+    let countDownInterval = setInterval(getCountdownDate, 1000);
+
+
     getCountdownDate();
-
-    setInterval(getCountdownDate, 1000);
-
 });
